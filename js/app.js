@@ -211,4 +211,11 @@ document.addEventListener('alpine:init', () => {
             window.history.pushState({}, '', url);
         }
     });
+
+    Alpine.data('homepageProducts', () => ({
+        products: PRODUCTS.filter(p => p.isFeatured).slice(0, 4), // Customized logic
+        formatPrice(price) {
+            return '$' + parseFloat(price).toFixed(2);
+        }
+    }));
 });
