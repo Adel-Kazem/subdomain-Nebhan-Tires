@@ -42,42 +42,36 @@
     <div class="container mx-auto flex flex-wrap justify-between items-center py-4 px-4">
         <!-- Logo -->
         <div class="flex items-center space-x-3">
-            <div class="h-12 w-12 bg-red-600 rounded-full flex items-center justify-center text-white text-xl font-bold">N</div>
-            <span class="font-extrabold text-2xl text-red-600 tracking-wide">NEBHAN TIRES</span>
+            <a href="index.html" class="flex items-center space-x-3">
+                <div class="h-12 w-12 bg-red-600 rounded-full flex items-center justify-center text-white text-xl font-bold">N</div>
+                <span class="font-extrabold text-2xl text-red-600 tracking-wide">NEBHAN TIRES</span>
+            </a>
         </div>
 
-        <!-- Search by Vehicle -->
-        <div class="w-full lg:w-auto my-4 lg:my-0 order-3 lg:order-2">
-            <div class="bg-gray-100 rounded-full p-1 flex">
-                <select class="bg-transparent border-none px-3 py-2 focus:outline-none rounded-l-full">
-                    <option>Select Make</option>
-                    <option>Toyota</option>
-                    <option>Honda</option>
-                    <option>Mercedes</option>
-                    <option>BMW</option>
-                </select>
-                <select class="bg-transparent border-none px-3 py-2 focus:outline-none">
-                    <option>Select Model</option>
-                    <option>Camry</option>
-                    <option>Accord</option>
-                    <option>C-Class</option>
-                    <option>3 Series</option>
-                </select>
-                <select class="bg-transparent border-none px-3 py-2 focus:outline-none">
-                    <option>Select Year</option>
-                    <option>2025</option>
-                    <option>2024</option>
-                    <option>2023</option>
-                    <option>2022</option>
-                </select>
-                <button class="bg-red-600 text-white px-5 py-2 rounded-full hover:bg-red-700 transition">
-                    <i class="fas fa-search"></i>
-                </button>
+        <!-- Navigation -->
+        <nav class="flex-1 lg:flex justify-center hidden lg:block" x-data="{ isOpen: false }">
+            <div class="flex space-x-1">
+                <a href="index.html" class="py-3 px-4 hover:bg-gray-700 text-gray-800 hover:text-white rounded transition flex items-center">
+                    <i class="fas fa-home mr-2"></i> Home
+                </a>
+                <div class="group relative">
+                    <a href="products.html" class="py-3 px-4 bg-red-600 hover:bg-red-700 transition flex items-center rounded text-white">
+                        <i class="fas fa-tire mr-2"></i> Tires & Wheels <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                    </a>
+                    <div class="absolute left-0 top-full w-48 bg-white shadow-lg hidden group-hover:block z-10">
+                        <a href="products.html?category=passenger-tires" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Passenger Tires</a>
+                        <a href="products.html?category=truck-tires" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Truck Tires</a>
+                        <a href="products.html?category=suv-tires" class="block px-4 py-2 text-gray-800 hover:bg-red-50">SUV Tires</a>
+                        <a href="products.html?category=performance-tires" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Performance Tires</a>
+                        <a href="products.html?category=alloy-wheels" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Alloy Wheels</a>
+                    </div>
+                </div>
+
             </div>
-        </div>
+        </nav>
 
         <!-- Action Buttons -->
-        <div class="flex items-center space-x-5 order-2 lg:order-3">
+        <div class="flex items-center space-x-5">
             <a href="#" class="text-gray-700 hover:text-red-600 transition relative">
                 <i class="fas fa-heart text-xl"></i>
                 <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
@@ -85,76 +79,52 @@
             <a href="#" class="text-gray-700 hover:text-red-600 transition relative">
                 <i class="fas fa-user text-xl"></i>
             </a>
-            <a href="cart.html" class="bg-red-600 text-white px-4 py-2 rounded-full hover:bg-red-700 transition font-semibold flex items-center"
-               x-data>
+            <a href="cart.html" class="bg-red-600 text-white px-4 py-2 rounded-full hover:bg-red-700 transition font-semibold flex items-center">
                 <i class="fas fa-shopping-cart mr-2"></i>
                 Cart (<span x-text="$store.cart.getTotalItems()">0</span>)
             </a>
+            <!-- Mobile menu button -->
+            <div class="lg:hidden flex items-center">
+                <button @click="isOpen = !isOpen" class="text-red-600 p-3 focus:outline-none">
+                    <i class="fas" :class="isOpen ? 'fa-times' : 'fa-bars'"></i>
+                </button>
+            </div>
         </div>
     </div>
 
-    <!-- Navigation -->
-    <nav class="bg-gray-800 text-white" x-data="{ isOpen: false }">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between">
-                <div class="flex space-x-1">
-                    <a href="index.html" class="py-3 px-4 bg-red-600 hover:bg-red-700 transition flex items-center">
-                        <i class="fas fa-home mr-2"></i> Home
-                    </a>
-                    <div class="group relative">
-                        <a href="products.html" class="py-3 px-4 hover:bg-gray-700 transition flex items-center">
-                            <i class="fas fa-tire mr-2"></i> Tires & Wheels <i class="fas fa-chevron-down ml-1 text-xs"></i>
-                        </a>
-                        <div class="absolute left-0 top-full w-48 bg-white shadow-lg hidden group-hover:block z-10">
-                            <a href="products.html?category=passenger-tires" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Passenger Tires</a>
-                            <a href="products.html?category=truck-tires" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Truck Tires</a>
-                            <a href="products.html?category=suv-tires" class="block px-4 py-2 text-gray-800 hover:bg-red-50">SUV Tires</a>
-                            <a href="products.html?category=performance-tires" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Performance Tires</a>
-                            <a href="products.html?category=alloy-wheels" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Alloy Wheels</a>
-                        </div>
-                    </div>
-                    <div class="group relative">
-                        <a href="#" class="py-3 px-4 hover:bg-gray-700 transition flex items-center">
-                            <i class="fas fa-car-wash mr-2"></i> Services <i class="fas fa-chevron-down ml-1 text-xs"></i>
-                        </a>
-                        <div class="absolute left-0 top-full w-48 bg-white shadow-lg hidden group-hover:block z-10">
-                            <a href="services.html?service=car-wash" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Car Washing</a>
-                            <a href="services.html?service=tire-change" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Tire Change</a>
-                            <a href="services.html?service=wheel-alignment" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Wheel Alignment</a>
-                            <a href="services.html?service=balancing" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Balancing</a>
-                            <a href="services.html?service=repair" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Tire Repair</a>
-                        </div>
-                    </div>
-                    <a href="products.html?filter=sale" class="py-3 px-4 hover:bg-gray-700 transition flex items-center">
-                        <i class="fas fa-tag mr-2"></i> Deals
-                    </a>
-                    <a href="about.html" class="py-3 px-4 hover:bg-gray-700 transition hidden md:flex items-center">
-                        <i class="fas fa-info-circle mr-2"></i> About
-                    </a>
-                    <a href="contact.html" class="py-3 px-4 hover:bg-gray-700 transition hidden md:flex items-center">
-                        <i class="fas fa-phone mr-2"></i> Contact
-                    </a>
-                </div>
-                <div class="hidden md:flex items-center">
-                    <a href="products.html?filter=new" class="py-3 px-4 hover:bg-gray-700 transition flex items-center text-green-400">
-                        <i class="fas fa-percentage mr-2"></i> New Arrivals
-                    </a>
-                </div>
-                <!-- Mobile menu button -->
-                <div class="md:hidden flex items-center">
-                    <button @click="isOpen = !isOpen" class="text-white p-3 focus:outline-none">
-                        <i class="fas" :class="isOpen ? 'fa-times' : 'fa-bars'"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <!-- Mobile menu -->
-        <div class="md:hidden" x-show="isOpen" x-cloak>
-            <a href="about.html" class="block py-2 px-4 text-sm hover:bg-gray-700">About</a>
-            <a href="contact.html" class="block py-2 px-4 text-sm hover:bg-gray-700">Contact</a>
-            <a href="products.html?filter=new" class="block py-2 px-4 text-sm hover:bg-gray-700 text-green-400">New Arrivals</a>
+    <!-- Mobile Navigation Menu -->
+    <nav class="bg-gray-800 text-white lg:hidden" x-data="{ isOpen: false }">
+        <div x-show="isOpen" x-cloak>
+            <a href="index.html" class="block py-3 px-4 hover:bg-gray-700 flex items-center">
+                <i class="fas fa-home mr-2"></i> Home
+            </a>
+            <a href="products.html" class="block py-3 px-4 bg-red-600 hover:bg-red-700 transition flex items-center">
+                <i class="fas fa-tire mr-2"></i> Tires & Wheels
+            </a>
+            <a href="#" class="block py-3 px-4 hover:bg-gray-700 flex items-center">
+                <i class="fas fa-car-wash mr-2"></i> Services
+            </a>
+            <a href="products.html?filter=sale" class="block py-3 px-4 hover:bg-gray-700 flex items-center">
+                <i class="fas fa-tag mr-2"></i> Deals
+            </a>
+            <a href="about.html" class="block py-3 px-4 hover:bg-gray-700 flex items-center">
+                <i class="fas fa-info-circle mr-2"></i> About
+            </a>
+            <a href="contact.html" class="block py-3 px-4 hover:bg-gray-700 flex items-center">
+                <i class="fas fa-phone mr-2"></i> Contact
+            </a>
+            <a href="products.html?filter=new" class="block py-3 px-4 hover:bg-gray-700 text-green-400 flex items-center">
+                <i class="fas fa-percentage mr-2"></i> New Arrivals
+            </a>
         </div>
     </nav>
+
+    <!-- Optional: New Arrivals link for large screens -->
+    <div class="hidden lg:flex justify-end bg-gray-800 px-4 py-2">
+        <a href="products.html?filter=new" class="py-3 px-4 hover:bg-gray-700 transition flex items-center text-green-400">
+            <i class="fas fa-percentage mr-2"></i> New Arrivals
+        </a>
+    </div>
 </header>
 
 <!-- Hero Section -->

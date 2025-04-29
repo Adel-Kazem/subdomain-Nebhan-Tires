@@ -6,7 +6,7 @@ document.addEventListener('alpine:init', () => {
      */
     Alpine.store('ui', {
         // WhatsApp business phone number
-        whatsAppNumber: '96170608543',
+        whatsAppNumber: '96170658221',
 
         // Menu state
         isMenuOpen: false,
