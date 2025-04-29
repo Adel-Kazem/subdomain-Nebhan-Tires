@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart | Nebhan Tires</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/categories.js"></script>
+    <script src="js/app.js"></script>
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+<!-- Top Bar -->
+<div class="bg-black text-white text-sm py-2">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+        <div class="flex items-center space-x-4">
+            <span><i class="fas fa-phone-alt mr-1"></i> +961 70 608 543</span>
+            <span class="hidden md:inline"><i class="fas fa-envelope mr-1"></i> info@nebhantires.com</span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <a href="#" class="hover:text-red-300 transition"><i class="fas fa-truck mr-1"></i> Order Tracking</a>
+            <span>|</span>
+            <a href="#" class="hover:text-red-300 transition">Find Us</a>
+        </div>
+    </div>
+</div>
+
+<!-- Header -->
+<header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto flex flex-wrap justify-between items-center py-4 px-4">
+        <!-- Logo -->
+        <div class="flex items-center space-x-3">
+            <a href="index.html" class="flex items-center space-x-3">
+                <div class="h-12 w-12 bg-red-600 rounded-full flex items-center justify-center text-white text-xl font-bold">N</div>
+                <span class="font-extrabold text-2xl text-red-600 tracking-wide">NEBHAN TIRES</span>
+            </a>
+        </div>
+
+        <!-- Search by Vehicle -->
+        <div class="w-full lg:w-auto my-4 lg:my-0 order-3 lg:order-2">
+            <div class="bg-gray-100 rounded-full p-1 flex">
+                <select class="bg-transparent border-none px-3 py-2 focus:outline-none rounded-l-full">
+                    <option>Select Make</option>
+                    <option>Toyota</option>
+                    <option>Honda</option>
+                    <option>Mercedes</option>
+                    <option>BMW</option>
+                </select>
+                <select class="bg-transparent border-none px-3 py-2 focus:outline-none">
+                    <option>Select Model</option>
+                    <option>Camry</option>
+                    <option>Accord</option>
+                    <option>C-Class</option>
+                    <option>3 Series</option>
+                </select>
+                <select class="bg-transparent border-none px-3 py-2 focus:outline-none">
+                    <option>Select Year</option>
+                    <option>2025</option>
+                    <option>2024</option>
+                    <option>2023</option>
+                    <option>2022</option>
+                </select>
+                <button class="bg-red-600 text-white px-5 py-2 rounded-full hover:bg-red-700 transition">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex items-center space-x-5 order-2 lg:order-3">
+            <a href="#" class="text-gray-700 hover:text-red-600 transition relative">
+                <i class="fas fa-heart text-xl"></i>
+                <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+            </a>
+            <a href="#" class="text-gray-700 hover:text-red-600 transition relative">
+                <i class="fas fa-user text-xl"></i>
+            </a>
+            <a href="cart.html" class="bg-red-600 text-white px-4 py-2 rounded-full hover:bg-red-700 transition font-semibold flex items-center">
+                <i class="fas fa-shopping-cart mr-2"></i>
+                Cart (<span x-text="$store.cart.getTotalItems()">0</span>)
+            </a>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-gray-800 text-white" x-data="{ isOpen: false }">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between">
+                <div class="flex space-x-1">
+                    <a href="index.html" class="py-3 px-4 hover:bg-gray-700 transition flex items-center">
+                        <i class="fas fa-home mr-2"></i> Home
+                    </a>
+                    <div class="group relative">
+                        <a href="products.html" class="py-3 px-4 hover:bg-gray-700 transition flex items-center">
+                            <i class="fas fa-tire mr-2"></i> Tires & Wheels <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </a>
+                        <div class="absolute left-0 top-full w-48 bg-white shadow-lg hidden group-hover:block z-10">
+                            <a href="products.html?category=passenger-tires" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Passenger Tires</a>
+                            <a href="products.html?category=truck-tires" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Truck Tires</a>
+                            <a href="products.html?category=suv-tires" class="block px-4 py-2 text-gray-800 hover:bg-red-50">SUV Tires</a>
+                            <a href="products.html?category=performance-tires" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Performance Tires</a>
+                            <a href="products.html?category=alloy-wheels" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Alloy Wheels</a>
+                        </div>
+                    </div>
+                    <div class="group relative">
+                        <a href="#" class="py-3 px-4 hover:bg-gray-700 transition flex items-center">
+                            <i class="fas fa-car-wash mr-2"></i> Services <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </a>
+                        <div class="absolute left-0 top-full w-48 bg-white shadow-lg hidden group-hover:block z-10">
+                            <a href="services.html?service=car-wash" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Car Washing</a>
+                            <a href="services.html?service=tire-change" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Tire Change</a>
+                            <a href="services.html?service=wheel-alignment" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Wheel Alignment</a>
+                            <a href="services.html?service=balancing" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Balancing</a>
+                            <a href="services.html?service=repair" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Tire Repair</a>
+                        </div>
+                    </div>
+                    <a href="products.html?filter=sale" class="py-3 px-4 hover:bg-gray-700 transition flex items-center">
+                        <i class="fas fa-tag mr-2"></i> Deals
+                    </a>
+                    <a href="about.html" class="py-3 px-4 hover:bg-gray-700 transition hidden md:flex items-center">
+                        <i class="fas fa-info-circle mr-2"></i> About
+                    </a>
+                    <a href="contact.html" class="py-3 px-4 hover:bg-gray-700 transition hidden md:flex items-center">
+                        <i class="fas fa-phone mr-2"></i> Contact
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center">
+                    <a href="products.html?filter=new" class="py-3 px-4 hover:bg-gray-700 transition flex items-center text-green-400">
+                        <i class="fas fa-percentage mr-2"></i> New Arrivals
+                    </a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button @click="isOpen = !isOpen" class="text-white p-3 focus:outline-none">
+                        <i class="fas" :class="isOpen ? 'fa-times' : 'fa-bars'"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div class="md:hidden" x-show="isOpen" x-cloak>
+            <a href="about.html" class="block py-2 px-4 text-sm hover:bg-gray-700">About</a>
+            <a href="contact.html" class="block py-2 px-4 text-sm hover:bg-gray-700">Contact</a>
+            <a href="products.html?filter=new" class="block py-2 px-4 text-sm hover:bg-gray-700 text-green-400">New Arrivals</a>
+        </div>
+    </nav>
+</header>
+
+<!-- Breadcrumb -->
+<div class="bg-gray-100 py-3">
+    <div class="container mx-auto px-4">
+        <div class="flex items-center text-sm">
+            <a href="index.html" class="text-gray-600 hover:text-red-600 transition">Home</a>
+            <span class="mx-2 text-gray-400">/</span>
+            <span class="text-red-600">Shopping Cart</span>
+        </div>
+    </div>
+</div>
+
+<!-- Page Title -->
+<div class="bg-white shadow-sm">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold">Shopping Cart</h1>
+    </div>
+</div>
+
+<!-- Cart Section -->
+<section class="container mx-auto px-4 py-8" x-data="cartPage">
+    <div class="flex flex-col lg:flex-row gap-8">
+        <!-- Empty Cart Message -->
+        <template x-if="$store.cart.items.length === 0">
+            <div class="w-full bg-white p-12 rounded-lg shadow-md text-center">
+                <div class="text-7xl text-gray-300 mb-4">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <h2 class="text-2xl font-bold mb-4">Your cart is empty</h2>
+                <p class="text-gray-600 mb-8">Looks like you haven't added any items to your cart yet.</p>
+                <a href="products.html" class="bg-red-600 text-white px-6 py-3 rounded-full inline-block font-semibold hover:bg-red-700 transition">
+                    Browse Products
+                </a>
+            </div>
+        </template>
+
+        <!-- Cart Items -->
+        <template x-if="$store.cart.items.length > 0">
+            <div class="lg:w-2/3 bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="p-6 border-b">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xl font-bold">Cart Items (<span x-text="$store.cart.getTotalItems()"></span>)</h2>
+                        <button @click="$store.cart.clearCart()" class="text-red-600 hover:text-red-800 text-sm font-medium focus:outline-none">
+                            <i class="fas fa-trash-alt mr-1"></i> Clear Cart
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Cart Item List -->
+                <div class="divide-y">
+                    <template x-for="(item, index) in $store.cart.items" :key="index">
+                        <div class="p-6 flex flex-col sm:flex-row gap-4">
+                            <!-- Product Image -->
+                            <div class="sm:w-24 h-24 flex-shrink-0">
+                                <img :src="item.image" :alt="item.name" class="w-full h-full object-cover rounded">
+                            </div>
+
+                            <!-- Product Info -->
+                            <div class="flex-grow">
+                                <div class="flex flex-col sm:flex-row justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-lg" x-text="item.name"></h3>
+
+                                        <!-- Product Options -->
+                                        <template x-if="Object.keys(item.options).length > 0">
+                                            <div class="mt-1 mb-2">
+                                                <template x-for="(value, option) in item.options" :key="option">
+                                                        <span class="text-sm text-gray-600">
+                                                            <span x-text="option.charAt(0).toUpperCase() + option.slice(1)"></span>:
+                                                            <span class="font-medium" x-text="value"></span>
+                                                        </span>
+                                                </template>
+                                            </div>
+                                        </template>
+
+                                        <div class="text-red-600 font-semibold" x-text="'$' + item.price.toFixed(2)"></div>
+                                    </div>
+
+                                    <div class="flex items-center space-x-4 mt-4 sm:mt-0">
+                                        <!-- Quantity Control -->
+                                        <div class="flex border rounded-full overflow-hidden">
+                                            <button
+                                                    @click="$store.cart.updateItemQuantity(index, item.quantity - 1)"
+                                                    class="px-3 py-1 bg-gray-100 hover:bg-gray-200 focus:outline-none">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                            <input
+                                                    type="number"
+                                                    :value="item.quantity"
+                                                    @change="$store.cart.updateItemQuantity(index, $event.target.value)"
+                                                    min="1"
+                                                    class="w-12 text-center border-0 focus:outline-none focus:ring-0">
+                                            <button
+                                                    @click="$store.cart.updateItemQuantity(index, item.quantity + 1)"
+                                                    class="px-3 py-1 bg-gray-100 hover:bg-gray-200 focus:outline-none">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                        </div>
+
+                                        <!-- Remove Button -->
+                                        <button
+                                                @click="$store.cart.removeItem(index)"
+                                                class="text-gray-500 hover:text-red-600 focus:outline-none">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Item Total -->
+                                <div class="mt-2 text-right sm:hidden">
+                                    <span class="font-medium">Total: $<span x-text="(item.price * item.quantity).toFixed(2)"></span></span>
+                                </div>
+                            </div>
+
+                            <!-- Desktop Item Total -->
+                            <div class="hidden sm:flex items-center justify-end w-28">
+                                <span class="font-bold">$<span x-text="(item.price * item.quantity).toFixed(2)"></span></span>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+                <!-- Continue Shopping -->
+                <div class="p-6 border-t">
+                    <a href="products.html" class="inline-flex items-center text-red-600 hover:text-red-800 font-medium">
+                        <i class="fas fa-arrow-left mr-2"></i> Continue Shopping
+                    </a>
+                </div>
+            </div>
+        </template>
+
+        <!-- Order Summary -->
+        <template x-if="$store.cart.items.length > 0">
+            <div class="lg:w-1/3">
+                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                    <h2 class="text-xl font-bold mb-4">Order Summary</h2>
+
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Subtotal</span>
+                            <span class="font-semibold" x-text="'$' + $store.cart.getTotalPrice().toFixed(2)"></span>
+                        </div>
+
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Shipping</span>
+                            <span class="font-semibold" x-text="qualifiesForFreeShipping() ? 'Free' : formatPrice(getCurrentShippingMethod().cost)"></span>
+                        </div>
+
+                        <template x-if="qualifiesForFreeShipping()">
+                            <div class="text-green-600 text-sm">
+                                <i class="fas fa-check-circle mr-1"></i> Your order qualifies for free shipping!
+                            </div>
+                        </template>
+
+                        <div class="border-t pt-3 flex justify-between font-bold text-lg">
+                            <span>Total</span>
+                            <span x-text="formatPrice(getFinalTotal())"></span>
+                        </div>
+                    </div>
+
+                    <!-- Shipping Methods -->
+                    <div class="mb-4">
+                        <h3 class="font-bold mb-2">Shipping Method</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center p-3 border rounded cursor-pointer transition" :class="shippingMethod === 'standard' ? 'border-red-600 bg-red-50' : 'border-gray-200 hover:border-red-300'">
+                                <input type="radio" name="shipping" value="standard" x-model="shippingMethod" class="text-red-600 focus:ring-red-500" @change="updateEstimatedDelivery()">
+                                <div class="ml-3 flex-grow">
+                                    <div class="flex justify-between">
+                                        <div class="font-semibold" x-text="shippingMethods.standard.name"></div>
+                                        <div x-text="formatPrice(shippingMethods.standard.cost)"></div>
+                                    </div>
+                                    <div class="text-sm text-gray-600" x-text="shippingMethods.standard.days + ' business days'"></div>
+                                </div>
+                            </label>
+
+                            <label class="flex items-center p-3 border rounded cursor-pointer transition" :class="shippingMethod === 'express' ? 'border-red-600 bg-red-50' : 'border-gray-200 hover:border-red-300'">
+                                <input type="radio" name="shipping" value="express" x-model="shippingMethod" class="text-red-600 focus:ring-red-500" @change="updateEstimatedDelivery()">
+                                <div class="ml-3 flex-grow">
+                                    <div class="flex justify-between">
+                                        <div class="font-semibold" x-text="shippingMethods.express.name"></div>
+                                        <div x-text="formatPrice(shippingMethods.express.cost)"></div>
+                                    </div>
+                                    <div class="text-sm text-gray-600" x-text="shippingMethods.express.days + ' business days'"></div>
+                                </div>
+                            </label>
+
+                            <label class="flex items-center p-3 border rounded cursor-pointer transition" :class="shippingMethod === 'free' ? 'border-red-600 bg-red-50' : 'border-gray-200 hover:border-red-300'">
+                                <input type="radio" name="shipping" value="free" x-model="shippingMethod" class="text-red-600 focus:ring-red-500" :disabled="!qualifiesForFreeShipping()" @change="updateEstimatedDelivery()">
+                                <div class="ml-3 flex-grow">
+                                    <div class="flex justify-between">
+                                        <div class="font-semibold" x-text="shippingMethods.free.name"></div>
+                                        <div>Free</div>
+                                    </div>
+                                    <div class="text-sm text-gray-600">
+                                        <span x-text="shippingMethods.free.days + ' business days'"></span>
+                                        <template x-if="!qualifiesForFreeShipping()">
+                                                <span class="text-gray-500">
+                                                    (Orders over <span x-text="'$' + shippingMethods.free.minimumOrder"></span>)
+                                                </span>
+                                        </template>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Estimated Delivery -->
+                    <div class="mb-6">
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-truck-fast text-red-600 mr-2"></i>
+                            <span>Estimated delivery: <span class="font-semibold" x-text="estimatedDelivery"></span></span>
+                        </div>
+                    </div>
+
+                    <!-- Coupon Code -->
+                    <div class="mb-6">
+                        <h3 class="font-bold mb-2">Coupon Code</h3>
+                        <div class="flex">
+                            <input
+                                    type="text"
+                                    x-model="couponCode"
+                                    placeholder="Enter coupon code"
+                                    class="flex-grow rounded-l-full border-gray-300 focus:ring-red-500 focus:border-red-500">
+                            <button
+                                    @click="applyCoupon"
+                                    class="bg-red-600 text-white px-4 py-2 rounded-r-full hover:bg-red-700 transition">
+                                Apply
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Checkout Buttons -->
+                    <div class="space-y-3">
+                        <button
+                                @click="proceedToCheckout"
+                                class="w-full bg-red-600 text-white px-4 py-3 rounded-full hover:bg-red-700 transition font-bold">
+                            Proceed to Checkout
+                        </button>
+
+                        <div class="relative">
+                            <div class="absolute inset-0 flex items-center">
+                                <div class="w-full border-t border-gray-200"></div>
+                            </div>
+                            <div class="relative flex justify-center text-sm">
+                                <span class="px-2 bg-white text-gray-500">OR</span>
+                            </div>
+                        </div>
+
+                        <button
+                                x-data="whatsappCheckout()"
+                                @click="sendOrder"
+                                class="w-full bg-green-500 text-white px-4 py-3 rounded-full hover:bg-green-600 transition font-bold flex items-center justify-center">
+                            <i class="fab fa-whatsapp text-xl mr-2"></i> Order via WhatsApp
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Secure Checkout Info -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-shield-alt text-red-600 text-2xl mr-3"></i>
+                        <h3 class="font-bold text-lg">Secure Checkout</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        Your personal and payment information is protected with industry-standard encryption.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <div class="w-10 h-6 bg-gray-100 rounded flex items-center justify-center">
+                            <i class="fab fa-cc-visa text-blue-800"></i>
+                        </div>
+                        <div class="w-10 h-6 bg-gray-100 rounded flex items-center justify-center">
+                            <i class="fab fa-cc-mastercard text-red-600"></i>
+                        </div>
+                        <div class="w-10 h-6 bg-gray-100 rounded flex items-center justify-center">
+                            <i class="fab fa-cc-amex text-blue-600"></i>
+                        </div>
+                        <div class="w-10 h-6 bg-gray-100 rounded flex items-center justify-center">
+                            <i class="fas fa-money-bill-wave text-green-600"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+</section>
+
+<!-- Related Products -->
+<section class="container mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold mb-6">You Might Also Like</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Product 1 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col h-full group">
+            <div class="relative">
+                <span class="absolute top-3 left-3 bg-red-500 text-white text-sm px-2 py-1 rounded-full">-15%</span>
+                <div class="absolute top-3 right-3 flex space-x-2">
+                    <button class="bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:text-red-500 transition">
+                        <i class="far fa-heart"></i>
+                    </button>
+                    <button class="bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:text-red-500 transition">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+                <img src="https://images.unsplash.com/photo-1555502287-a0748352c471?auto=format&q=80" alt="Premium All-Season Tires" class="w-full h-48 object-cover group-hover:scale-105 transition duration-300">
+            </div>
+            <div class="p-4 flex flex-col flex-grow">
+                <div class="flex items-center mb-2">
+                    <div class="flex text-amber-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <span class="text-gray-600 text-sm ml-2">4.5 (86)</span>
+                </div>
+                <h3 class="font-bold text-lg">Michelin Premier A/S</h3>
+                <p class="text-gray-600 text-sm mb-4">Premium all-season tires with exceptional wet braking and comfort.</p>
+                <div class="mt-auto">
+                    <div class="flex justify-between items-center mb-3">
+                        <div>
+                            <span class="line-through text-gray-400 text-sm">$189.99</span>
+                            <span class="font-bold text-lg text-red-600">$159.99</span>
+                        </div>
+                        <span class="text-green-500 text-sm">In Stock</span>
+                    </div>
+                    <button class="w-full bg-red-600 text-white px-4 py-2 rounded-full hover:bg-red-700 transition flex items-center justify-center"
+                            @click="$store.cart.addItem({id: 1, name: 'Michelin Premier A/S', price: 159.99, images: ['https://images.unsplash.com/photo-1555502287-a0748352c471?auto=format&q=80'], stock: 25}, 1)">
+                        <i class="fas fa-cart-plus mr-2"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col h-full group">
+            <div class="relative">
+                <div class="absolute top-3 right-3 flex space-x-2">
+                    <button class="bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:text-red-500 transition">
+                        <i class="far fa-heart"></i>
+                    </button>
+                    <button class="bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:text-red-500 transition">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+                <img src="https://images.unsplash.com/photo-1560169897-fc0cdbdfa4d5?auto=format&q=80" alt="Performance Tires" class="w-full h-48 object-cover group-hover:scale-105 transition duration-300">
+            </div>
+            <div class="p-4 flex flex-col flex-grow">
+                <div class="flex items-center mb-2">
+                    <div class="flex text-amber-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <span class="text-gray-600 text-sm ml-2">5.0 (42)</span>
+                </div>
+                <h3 class="font-bold text-lg">Bridgestone Potenza Sport</h3>
+                <p class="text-gray-600 text-sm mb-4">High-performance tires with superior handling and grip for sport cars.</p>
+                <div class="mt-auto">
+                    <div class="flex justify-between items-center mb-3">
+                        <div>
+                            <span class="font-bold text-lg text-red-600">$229.99</span>
+                        </div>
+                        <span class="text-green-500 text-sm">In Stock</span>
+                    </div>
+                    <button class="w-full bg-red-600 text-white px-4 py-2 rounded-full hover:bg-red-700 transition flex items-center justify-center"
+                            @click="$store.cart.addItem({id: 2, name: 'Bridgestone Potenza Sport', price: 229.99, images: ['https://images.unsplash.com/photo-1560169897-fc0cdbdfa4d5?auto=format&q=80'], stock: 18}, 1)">
+                        <i class="fas fa-cart-plus mr-2"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col h-full group">
+            <div class="relative">
+                <span class="absolute top-3 left-3 bg-amber-500 text-white text-sm px-2 py-1 rounded-full">Best Seller</span>
+                <div class="absolute top-3 right-3 flex space-x-2">
+                    <button class="bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:text-red-500 transition">
+                        <i class="far fa-heart"></i>
+                    </button>
+                    <button class="bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:text-red-500 transition">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+                <img src="https://images.unsplash.com/photo-1529776164-ae7a0c477f5d?auto=format&q=80" alt="All-Terrain Tires" class="w-full h-48 object-cover group-hover:scale-105 transition duration-300">
+            </div>
+            <div class="p-4 flex flex-col flex-grow">
+                <div class="flex items-center mb-2">
+                    <div class="flex text-amber-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <span class="text-gray-600 text-sm ml-2">4.0 (54)</span>
+                </div>
+                <h3 class="font-bold text-lg">BF Goodrich All-Terrain T/A KO2</h3>
+                <p class="text-gray-600 text-sm mb-4">Durable all-terrain tires for trucks and SUVs with enhanced traction.</p>
+                <div class="mt-auto">
+                    <div class="flex justify-between items-center mb-3">
+                        <div>
+                            <span class="font-bold text-lg text-red-600">$199.99</span>
+                        </div>
+                        <span class="text-green-500 text-sm">In Stock</span>
+                    </div>
+                    <button class="w-full bg-red-600 text-white px-4 py-2 rounded-full hover:bg-red-700 transition flex items-center justify-center"
+                            @click="$store.cart.addItem({id: 3, name: 'BF Goodrich All-Terrain T/A KO2', price: 199.99, images: ['https://images.unsplash.com/photo-1529776164-ae7a0c477f5d?auto=format&q=80'], stock: 20}, 1)">
+                        <i class="fas fa-cart-plus mr-2"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col h-full group">
+            <div class="relative">
+                <span class="absolute top-3 left-3 bg-gray-800 text-white text-sm px-2 py-1 rounded-full">New</span>
+                <div class="absolute top-3 right-3 flex space-x-2">
+                    <button class="bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:text-red-500 transition">
+                        <i class="far fa-heart"></i>
+                    </button>
+                    <button class="bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:text-red-500 transition">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+                <img src="https://images.unsplash.com/photo-1611921561618-13debee11692?auto=format&q=80" alt="Luxury Alloy Wheels" class="w-full h-48 object-cover group-hover:scale-105 transition duration-300">
+            </div>
+            <div class="p-4 flex flex-col flex-grow">
+                <div class="flex items-center mb-2">
+                    <div class="flex text-amber-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <span class="text-gray-600 text-sm ml-2">4.5 (32)</span>
+                </div>
+                <h3 class="font-bold text-lg">Enkei RPF1 Alloy Wheels</h3>
+                <p class="text-gray-600 text-sm mb-4">Lightweight performance alloy wheels for enhanced handling and style.</p>
+                <div class="mt-auto">
+                    <div class="flex justify-between items-center mb-3">
+                        <div>
+                            <span class="font-bold text-lg text-red-600">$279.99</span>
+                        </div>
+                        <span class="text-amber-500 text-sm">Low Stock</span>
+                    </div>
+                    <button class="w-full bg-red-600 text-white px-4 py-2 rounded-full hover:bg-red-700 transition flex items-center justify-center"
+                            @click="$store.cart.addItem({id: 4, name: 'Enkei RPF1 Alloy Wheels', price: 279.99, images: ['https://images.unsplash.com/photo-1611921561618-13debee11692?auto=format&q=80'], stock: 8}, 1)">
+                        <i class="fas fa-cart-plus mr-2"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-gray-400 pt-12 pb-6">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-12 mb-12">
+            <div class="md:col-span-2">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="h-12 w-12 bg-red-600 rounded-full flex items-center justify-center text-white text-xl font-bold">N</div>
+                    <span class="font-extrabold text-2xl text-white tracking-wide">NEBHAN TIRES</span>
+                </div>
+                <p class="mb-6">
+                    Your trusted source for high-quality tires, wheels, and automotive services in Lebanon. With a commitment to customer satisfaction and passion for cars.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#" class="bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-red-600 transition">
+                        <i class="fab fa-facebook-f text-white"></i>
+                    </a>
+                    <a href="#" class="bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-red-600 transition">
+                        <i class="fab fa-twitter text-white"></i>
+                    </a>
+                    <a href="#" class="bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-red-600 transition">
+                        <i class="fab fa-instagram text-white"></i>
+                    </a>
+                    <a href="#" class="bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-red-600 transition">
+                        <i class="fab fa-whatsapp text-white"></i>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-white font-bold text-lg mb-6">Shop</h3>
+                <ul class="space-y-3">
+                    <li><a href="products.html?category=passenger-tires" class="hover:text-white transition">Passenger Tires</a></li>
+                    <li><a href="products.html?category=truck-tires" class="hover:text-white transition">Truck Tires</a></li>
+                    <li><a href="products.html?category=suv-tires" class="hover:text-white transition">SUV Tires</a></li>
+                    <li><a href="products.html?category=performance-tires" class="hover:text-white transition">Performance Tires</a></li>
+                    <li><a href="products.html?category=alloy-wheels" class="hover:text-white transition">Alloy Wheels</a></li>
+                    <li><a href="products.html?filter=sale" class="hover:text-white transition">Special Offers</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-white font-bold text-lg mb-6">Services</h3>
+                <ul class="space-y-3">
+                    <li><a href="services.html?service=tire-change" class="hover:text-white transition">Tire Change</a></li>
+                    <li><a href="services.html?service=wheel-alignment" class="hover:text-white transition">Wheel Alignment</a></li>
+                    <li><a href="services.html?service=balancing" class="hover:text-white transition">Wheel Balancing</a></li>
+                    <li><a href="services.html?service=car-wash" class="hover:text-white transition">Car Washing</a></li>
+                    <li><a href="services.html?service=repair" class="hover:text-white transition">Tire Repair</a></li>
+                    <li><a href="services.html" class="hover:text-white transition">All Services</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-white font-bold text-lg mb-6">Contact</h3>
+                <ul class="space-y-3">
+                    <li class="flex items-start">
+                        <i class="fas fa-map-marker-alt mt-1 mr-3 text-red-600"></i>
+                        <span>Nebhan Tires, Main Street, Nabatieh-kfrarruman, Lebanon</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-phone-alt mr-3 text-red-600"></i>
+                        <span>+961 70 608 543</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-envelope mr-3 text-red-600"></i>
+                        <span>info@nebhantires.com</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-clock mr-3 text-red-600"></i>
+                        <span>Mon-Sat: 8AM-6PM, Sun: 9AM-2PM</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 pt-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p>© 2025 Nebhan Tires. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition">Terms of Service</a>
+                    <a href="#" class="hover:text-white transition">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- WhatsApp Chat Button -->
+<div class="fixed bottom-6 right-6 z-50">
+    <button
+            @click="$store.ui.openWhatsApp('Hello, I would like to inquire about my cart items.')"
+            class="bg-green-500 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg hover:bg-green-600 transition-colors duration-300">
+        <i class="fab fa-whatsapp text-2xl"></i>
+    </button>
+</div>
+
+<!-- Scroll to Top Button -->
+<div class="fixed bottom-6 left-6 z-50">
+    <button
+            @click="$store.ui.scrollToTop()"
+            class="bg-gray-700 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg hover:bg-gray-800 transition-colors duration-300">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+</div>
+</body>
+</html>

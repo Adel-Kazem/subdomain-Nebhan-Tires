@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details | Nebhan Tires</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        [x-cloak] { display: none !important; }
+        .zoom-container {
+            overflow: hidden;
+            position: relative;
+        }
+        .zoom-container:hover .zoomed {
+            transform: scale(1.5);
+        }
+        .zoomed {
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans" x-data>
+<!-- Top Bar -->
+<div class="bg-black text-white text-sm py-2">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+        <div class="flex items-center space-x-4">
+            <span><i class="fas fa-phone-alt mr-1"></i> +961 70 608 543</span>
+            <span class="hidden md:inline"><i class="fas fa-envelope mr-1"></i> info@nebhantires.com</span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <a href="#" class="hover:text-red-300 transition"><i class="fas fa-truck mr-1"></i> Order Tracking</a>
+            <span>|</span>
+            <a href="#" class="hover:text-red-300 transition">Find Us</a>
+        </div>
+    </div>
+</div>
+
+<!-- Header -->
+<header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto flex flex-wrap justify-between items-center py-4 px-4">
+        <!-- Logo -->
+        <div class="flex items-center space-x-3">
+            <a href="index.html" class="flex items-center space-x-3">
+                <div class="h-12 w-12 bg-red-600 rounded-full flex items-center justify-center text-white text-xl font-bold">N</div>
+                <span class="font-extrabold text-2xl text-red-600 tracking-wide">NEBHAN TIRES</span>
+            </a>
+        </div>
+
+        <!-- Search by Vehicle -->
+        <div class="w-full lg:w-auto my-4 lg:my-0 order-3 lg:order-2">
+            <div class="bg-gray-100 rounded-full p-1 flex">
+                <select class="bg-transparent border-none px-3 py-2 focus:outline-none rounded-l-full">
+                    <option>Select Make</option>
+                    <option>Toyota</option>
+                    <option>Honda</option>
+                    <option>Mercedes</option>
+                    <option>BMW</option>
+                </select>
+                <select class="bg-transparent border-none px-3 py-2 focus:outline-none">
+                    <option>Select Model</option>
+                    <option>Camry</option>
+                    <option>Accord</option>
+                    <option>C-Class</option>
+                    <option>3 Series</option>
+                </select>
+                <select class="bg-transparent border-none px-3 py-2 focus:outline-none">
+                    <option>Select Year</option>
+                    <option>2025</option>
+                    <option>2024</option>
+                    <option>2023</option>
+                    <option>2022</option>
+                </select>
+                <button class="bg-red-600 text-white px-5 py-2 rounded-full hover:bg-red-700 transition">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex items-center space-x-5 order-2 lg:order-3">
+            <a href="#" class="text-gray-700 hover:text-red-600 transition relative">
+                <i class="fas fa-heart text-xl"></i>
+                <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+            </a>
+            <a href="#" class="text-gray-700 hover:text-red-600 transition relative">
+                <i class="fas fa-user text-xl"></i>
+            </a>
+            <a href="cart.html" class="bg-red-600 text-white px-4 py-2 rounded-full hover:bg-red-700 transition font-semibold flex items-center">
+                <i class="fas fa-shopping-cart mr-2"></i>
+                Cart (<span x-text="$store.cart.getTotalItems()">0</span>)
+            </a>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-gray-800 text-white" x-data="{ isOpen: false }">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between">
+                <div class="flex space-x-1">
+                    <a href="index.html" class="py-3 px-4 hover:bg-gray-700 transition flex items-center">
+                        <i class="fas fa-home mr-2"></i> Home
+                    </a>
+                    <div class="group relative">
+                        <a href="products.html" class="py-3 px-4 bg-red-600 hover:bg-red-700 transition flex items-center">
+                            <i class="fas fa-tire mr-2"></i> Tires & Wheels <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </a>
+                        <div class="absolute left-0 top-full w-48 bg-white shadow-lg hidden group-hover:block z-10">
+                            <a href="products.html?category=passenger-tires" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Passenger Tires</a>
+                            <a href="products.html?category=truck-tires" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Truck Tires</a>
+                            <a href="products.html?category=suv-tires" class="block px-4 py-2 text-gray-800 hover:bg-red-50">SUV Tires</a>
+                            <a href="products.html?category=performance-tires" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Performance Tires</a>
+                            <a href="products.html?category=alloy-wheels" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Alloy Wheels</a>
+                        </div>
+                    </div>
+                    <div class="group relative">
+                        <a href="#" class="py-3 px-4 hover:bg-gray-700 transition flex items-center">
+                            <i class="fas fa-car-wash mr-2"></i> Services <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </a>
+                        <div class="absolute left-0 top-full w-48 bg-white shadow-lg hidden group-hover:block z-10">
+                            <a href="services.html?service=car-wash" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Car Washing</a>
+                            <a href="services.html?service=tire-change" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Tire Change</a>
+                            <a href="services.html?service=wheel-alignment" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Wheel Alignment</a>
+                            <a href="services.html?service=balancing" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Balancing</a>
+                            <a href="services.html?service=repair" class="block px-4 py-2 text-gray-800 hover:bg-red-50">Tire Repair</a>
+                        </div>
+                    </div>
+                    <a href="products.html?filter=sale" class="py-3 px-4 hover:bg-gray-700 transition flex items-center">
+                        <i class="fas fa-tag mr-2"></i> Deals
+                    </a>
+                    <a href="about.html" class="py-3 px-4 hover:bg-gray-700 transition hidden md:flex items-center">
+                        <i class="fas fa-info-circle mr-2"></i> About
+                    </a>
+                    <a href="contact.html" class="py-3 px-4 hover:bg-gray-700 transition hidden md:flex items-center">
+                        <i class="fas fa-phone mr-2"></i> Contact
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center">
+                    <a href="products.html?filter=new" class="py-3 px-4 hover:bg-gray-700 transition flex items-center text-green-400">
+                        <i class="fas fa-percentage mr-2"></i> New Arrivals
+                    </a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button @click="isOpen = !isOpen" class="text-white p-3 focus:outline-none">
+                        <i class="fas" :class="isOpen ? 'fa-times' : 'fa-bars'"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div class="md:hidden" x-show="isOpen" x-cloak>
+            <a href="about.html" class="block py-2 px-4 text-sm hover:bg-gray-700">About</a>
+            <a href="contact.html" class="block py-2 px-4 text-sm hover:bg-gray-700">Contact</a>
+            <a href="products.html?filter=new" class="block py-2 px-4 text-sm hover:bg-gray-700 text-green-400">New Arrivals</a>
+        </div>
+    </nav>
+</header>
+
+<!-- Breadcrumb -->
+<div class="bg-gray-100 py-3">
+    <div class="container mx-auto px-4">
+        <div class="flex items-center text-sm" x-data>
+            <a href="index.html" class="text-gray-600 hover:text-red-600 transition">Home</a>
+            <span class="mx-2 text-gray-400">/</span>
+            <a href="products.html" class="text-gray-600 hover:text-red-600 transition">All Products</a>
+            <template x-if="$store.productData.currentProduct && $store.productData.currentProduct.categories && $store.productData.currentProduct.categories.length > 0">
+                <div class="flex items-center">
+                    <span class="mx-2 text-gray-400">/</span>
+                    <a href="products.html" class="text-gray-600 hover:text-red-600 transition">Category</a>
+                </div>
+            </template>
+            <template x-if="$store.productData.currentProduct">
+                <div class="flex items-center">
+                    <span class="mx-2 text-gray-400">/</span>
+                    <span class="text-red-600" x-text="$store.productData.currentProduct.name"></span>
+                </div>
+            </template>
+        </div>
+    </div>
+</div>
+
+<!-- Product Detail -->
+<section class="container mx-auto px-4 py-8">
+    <template x-if="!$store.productData.currentProduct || !$store.productData.currentProduct.id">
+        <div class="bg-white p-8 rounded-lg shadow-md text-center">
+            <div class="text-6xl text-gray-300 mb-4">
+                <i class="fas fa-search"></i>
+            </div>
+            <h2 class="text-2xl font-bold mb-4">Product Not Found</h2>
+            <p class="text-gray-600 mb-6">The product you're looking for doesn't exist or has been removed.</p>
+            <a href="products.html" class="bg-red-600 text-white px-6 py-3 rounded-full inline-block font-semibold hover:bg-red-700 transition">
+                Browse All Products
+            </a>
+        </div>
+    </template>
+
+    <template x-if="$store.productData.currentProduct && $store.productData.currentProduct.id">
+        <div>
+            <!-- Product Content -->
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Product Images -->
+                <div class="lg:w-1/2" x-data="productViewer($store.productData.currentProduct)">
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <!-- Thumbnails (vertical on desktop) -->
+                        <div class="order-2 md:order-1 md:w-1/5">
+                            <div class="flex md:flex-col gap-2 overflow-x-auto md:overflow-y-auto md:h-[400px]" x-ref="thumbnailsContainer" @scroll="checkScrollPosition">
+                                <!-- Product Base Images -->
+                                <template x-for="(img, index) in product.images" :key="'img-'+index">
+                                    <div
+                                            @click="selectImage(img)"
+                                            class="w-20 h-20 border rounded cursor-pointer overflow-hidden flex-shrink-0"
+                                            :class="{'border-red-500': getSelectedImage() === img, 'border-gray-200': getSelectedImage() !== img}">
+                                        <img :src="img" :alt="product.name + ' ' + (index + 1)" class="w-full h-full object-cover" @error="handleImageError">
+                                    </div>
+                                </template>
+
+                                <!-- Option Images -->
+                                <template x-if="product.option_images">
+                                    <template x-for="(optionValues, optionType) in product.option_images">
+                                        <template x-for="(images, optionValue) in optionValues">
+                                            <template x-for="(img, index) in images" :key="'option-'+optionType+'-'+optionValue+'-'+index">
+                                                <div
+                                                        @click="selectImage(img)"
+                                                        class="w-20 h-20 border rounded cursor-pointer overflow-hidden flex-shrink-0"
+                                                        :class="{'border-red-500': getSelectedImage() === img, 'border-gray-200': getSelectedImage() !== img}"
+                                                        data-thumbnail-type="option"
+                                                        :data-option-type="optionType"
+                                                        :data-option-value="optionValue">
+                                                    <img :src="img" :alt="optionValue + ' ' + (index + 1)" class="w-full h-full object-cover" @error="handleImageError">
+                                                </div>
+                                            </template>
+                                        </template>
+                                    </template>
+                                </template>
+
+                                <!-- Variant Images -->
+                                <template x-if="product.variant_images">
+                                    <template x-for="(variantImage, variantKey) in product.variant_images">
+                                        <template x-if="Array.isArray(variantImage)">
+                                            <template x-for="(img, index) in variantImage" :key="'variant-'+variantKey+'-'+index">
+                                                <div
+                                                        @click="selectImage(img)"
+                                                        class="w-20 h-20 border rounded cursor-pointer overflow-hidden flex-shrink-0"
+                                                        :class="{'border-red-500': getSelectedImage() === img, 'border-gray-200': getSelectedImage() !== img}"
+                                                        data-thumbnail-type="variant"
+                                                        :data-variant-key="variantKey">
+                                                    <img :src="img" :alt="formatVariantName(variantKey) + ' ' + (index + 1)" class="w-full h-full object-cover" @error="handleImageError">
+                                                </div>
+                                            </template>
+                                        </template>
+                                        <template x-if="!Array.isArray(variantImage)">
+                                            <div
+                                                    @click="selectImage(variantImage)"
+                                                    class="w-20 h-20 border rounded cursor-pointer overflow-hidden flex-shrink-0"
+                                                    :class="{'border-red-500': getSelectedImage() === variantImage, 'border-gray-200': getSelectedImage() !== variantImage}"
+                                                    data-thumbnail-type="variant"
+                                                    :data-variant-key="variantKey">
+                                                <img :src="variantImage" :alt="formatVariantName(variantKey)" class="w-full h-full object-cover" @error="handleImageError">
+                                            </div>
+                                        </template>
+                                    </template>
+                                </template>
+                            </div>
+
+                            <!-- Thumbnail Navigation Buttons (Mobile) -->
+                            <div class="flex justify-center mt-2 md:hidden gap-2">
+                                <button
+                                        @click="scrollThumbnails('left')"
+                                        class="bg-gray-200 w-8 h-8 rounded-full flex items-center justify-center text-gray-600 hover:bg-gray-300 transition-colors"
+                                        :class="{'opacity-50 cursor-default': isScrollLeftEnd}">
+                                    <i class="fas fa-arrow-left"></i>
+                                </button>
+                                <button
+                                        @click="scrollThumbnails('right')"
+                                        class="bg-gray-200 w-8 h-8 rounded-full flex items-center justify-center text-gray-600 hover:bg-gray-300 transition-colors"
+                                        :class="{'opacity-50 cursor-default': isScrollRightEnd}">
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Main Image -->
+                        <div class="order-1 md:order-2 md:w-4/5">
+                            <div class="bg-white border rounded-lg overflow-hidden zoom-container h-[400px]"
+                                 @mousemove="mouseMove"
+                                 @mouseenter="mouseEnter"
+                                 @mouseleave="mouseLeave"
+                                 @touchstart="touchStart"
+                                 @touchmove="touchMove"
+                                 @touchend="touchEnd">
+                                <img
+                                        :src="getSelectedImage()"
+                                        :alt="product.name"
+                                        class="w-full h-full object-contain zoomed"
+                                        x-ref="mainImage"
+                                        :style="imgStyle"
+                                        @error="handleImageError">
+                            </div>
+
+                            <!-- Image Hint -->
+                            <div class="mt-2 text-center text-sm text-gray-500">
+                                <i class="fas fa-search-plus mr-1"></i> Hover to zoom, click for fullscreen
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="lg:w-1/2" x-data="productDetail({ product: $store.productData.currentProduct })">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <!-- Labels -->
+                        <div class="flex flex-wrap gap-2 mb-3">
+                            <template x-if="product.isNew">
+                                <span class="bg-gray-800 text-white px-3 py-1 rounded-full text-sm font-medium">New</span>
+                            </template>
+                            <template x-if="product.isOnSale">
+                                <span class="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-medium">Sale</span>
+                            </template>
+                            <template x-if="product.isFeatured">
+                                <span class="bg-amber-500 text-white px-3 py-1 rounded-full text-sm font-medium">Featured</span>
+                            </template>
+                            <template x-if="product.free_shipping">
+                                <span class="bg-green-600 text-white px-3 py-1 rounded-full text-sm font-medium">Free Shipping</span>
+                            </template>
+                        </div>
+
+                        <!-- Title and Rating -->
+                        <h1 class="text-3xl font-bold mb-2" x-text="product.name"></h1>
+
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-amber-400 mr-2">
+                                <template x-for="i in Math.floor(product.rating || 0)">
+                                    <i class="fas fa-star"></i>
+                                </template>
+                                <template x-if="product.rating % 1 > 0">
+                                    <i class="fas fa-star-half-alt"></i>
+                                </template>
+                                <template x-for="i in (5 - Math.ceil(product.rating || 0))">
+                                    <i class="far fa-star"></i>
+                                </template>
+                            </div>
+                            <span class="text-gray-600" x-text="`${product.rating} (${product.reviews_count} reviews)`"></span>
+                        </div>
+
+                        <!-- Price -->
+                        <div class="mb-6">
+                            <template x-if="product.isOnSale">
+                                <span class="line-through text-gray-400 text-xl" x-text="formatPrice(product.base_price)"></span>
+                            </template>
+                            <span class="text-3xl font-bold text-red-600" x-text="formatPrice(getVariantPrice())"></span>
+                            <template x-if="product.isOnSale">
+                                    <span class="ml-2 bg-red-100 text-red-800 px-2 py-1 rounded-md text-sm font-medium">
+                                        Save <span x-text="formatPrice(product.base_price - getVariantPrice())"></span>
+                                    </span>
+                            </template>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="mb-6">
+                            <h3 class="font-bold text-lg mb-2">Description</h3>
+                            <p class="text-gray-700" x-text="product.description"></p>
+                        </div>
+
+                        <!-- Product Options -->
+                        <template x-if="product.options">
+                            <div class="space-y-4 mb-6">
+                                <template x-for="(values, option) in product.options" :key="option">
+                                    <div>
+                                        <label class="block font-bold mb-2" x-text="formatOptionName(option)"></label>
+                                        <div class="flex flex-wrap gap-2">
+                                            <template x-for="value in values" :key="value">
+                                                <button
+                                                        @click="selectOption(option, value)"
+                                                        class="px-4 py-2 border rounded-full text-sm font-medium"
+                                                        :class="{
+                                                            'bg-red-600 text-white border-red-600': selectedOptions[option] === value,
+                                                            'bg-white text-gray-800 border-gray-300 hover:border-red-600': selectedOptions[option] !== value,
+                                                            'opacity-50 cursor-not-allowed': !isOptionValueAvailable(option, value)
+                                                        }"
+                                                        :disabled="!isOptionValueAvailable(option, value)">
+                                                    <span x-text="value.charAt(0).toUpperCase() + value.slice(1)"></span>
+                                                </button>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                        </template>
+
+                        <!-- Stock Status and Quantity -->
+                        <div class="flex items-center justify-between mb-6">
+                            <div>
+                                <span class="font-bold mr-2">Availability:</span>
+                                <template x-if="isVariantInStock()">
+                                    <span class="text-green-600" x-text="getVariantStock() > 10 ? 'In Stock' : `Only ${getVariantStock()} left`"></span>
+                                </template>
+                                <template x-if="!isVariantInStock()">
+                                    <span class="text-red-600">Out of Stock</span>
+                                </template>
+                            </div>
+
+                            <div class="flex items-center">
+                                <span class="mr-2 font-bold">Quantity:</span>
+                                <div class="flex border rounded-full overflow-hidden">
+                                    <button
+                                            @click="decreaseQuantity"
+                                            class="px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:outline-none"
+                                            :disabled="quantity <= 1 || !isVariantInStock()"
+                                            :class="{'opacity-50 cursor-not-allowed': quantity <= 1 || !isVariantInStock()}">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <input
+                                            type="number"
+                                            x-model.number="quantity"
+                                            min="1"
+                                            :max="getVariantStock()"
+                                            class="w-12 text-center border-0 focus:outline-none focus:ring-0"
+                                            :disabled="!isVariantInStock()">
+                                    <button
+                                            @click="increaseQuantity"
+                                            class="px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:outline-none"
+                                            :disabled="quantity >= getVariantStock() || !isVariantInStock()"
+                                            :class="{'opacity-50 cursor-not-allowed': quantity >= getVariantStock() || !isVariantInStock()}">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="flex flex-col sm:flex-row gap-3 mb-6">
+                            <button
+                                    @click="addToCart"
+                                    class="flex-1 bg-red-600 text-white py-3 px-6 rounded-full font-bold hover:bg-red-700 transition flex items-center justify-center"
+                                    :disabled="!isVariantInStock()"
+                                    :class="{'opacity-50 cursor-not-allowed': !isVariantInStock()}">
+                                <i class="fas fa-cart-plus mr-2"></i> Add to Cart
+                            </button>
+                            <button class="flex-1 bg-gray-200 text-gray-800 py-3 px-6 rounded-full font-bold hover:bg-gray-300 transition flex items-center justify-center">
+                                <i class="far fa-heart mr-2"></i> Add to Wishlist
+                            </button>
+                        </div>
+
+                        <!-- WhatsApp Inquiry -->
+                        <div x-data="whatsappInquiry()" class="mb-6">
+                            <button
+                                    @click="inquireAboutProduct"
+                                    class="w-full bg-green-500 text-white py-3 px-6 rounded-full font-bold hover:bg-green-600 transition flex items-center justify-center">
+                                <i class="fab fa-whatsapp mr-2 text-xl"></i> Ask About This Product via WhatsApp
+                            </button>
+                        </div>
+
+                        <!-- Shipping Info -->
+                        <div class="border-t pt-4 mb-4">
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-truck-fast text-red-600 mr-3 text-xl"></i>
+                                <div>
+                                    <span class="font-bold">Delivery:</span>
+                                    <span class="text-gray-700">
+                                            <template x-if="product.free_shipping || getVariantShippingCost() === 0">Free Shipping</template>
+                                            <template x-if="!product.free_shipping && getVariantShippingCost() > 0">
+                                                <span x-text="formatPrice(getVariantShippingCost()) + ' Shipping'"></span>
+                                            </template>
+                                        </span>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-calendar-check text-red-600 mr-3 text-xl"></i>
+                                <div>
+                                    <span class="font-bold">Estimated Delivery:</span>
+                                    <span class="text-gray-700">2-5 business days in Lebanon</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Additional Information -->
+                        <div class="border-t pt-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-shield-alt text-red-600 mr-3 text-xl"></i>
+                                <div>
+                                    <span class="font-bold">1-Year Warranty</span>
+                                    <span class="text-gray-700 block text-sm">Against manufacturer defects</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Details Tabs -->
+            <div class="mt-8" x-data="{ activeTab: 'details', product: $store.productData.currentProduct }">
+                <div class="border-b border-gray-200">
+                    <div class="flex flex-wrap -mb-px">
+                        <button
+                                @click="activeTab = 'details'"
+                                class="mr-2 py-2 px-4 font-medium text-sm border-b-2 focus:outline-none"
+                                :class="activeTab === 'details' ? 'border-red-600 text-red-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'">
+                            Details & Specifications
+                        </button>
+                        <button
+                                @click="activeTab = 'features'"
+                                class="mr-2 py-2 px-4 font-medium text-sm border-b-2 focus:outline-none"
+                                :class="activeTab === 'features' ? 'border-red-600 text-red-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'">
+                            Features
+                        </button>
+                        <button
+                                @click="activeTab = 'reviews'"
+                                class="mr-2 py-2 px-4 font-medium text-sm border-b-2 focus:outline-none"
+                                :class="activeTab === 'reviews' ? 'border-red-600 text-red-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'">
+                            Reviews
+                        </button>
+                        <button
+                                @click="activeTab = 'shipping'"
+                                class="py-2 px-4 font-medium text-sm border-b-2 focus:outline-none"
+                                :class="activeTab === 'shipping' ? 'border-red-600 text-red-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'">
+                            Shipping & Returns
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tab Content -->
+                <div class="bg-white rounded-lg shadow-md p-6 mt-4">
+                    <!-- Details Tab -->
+                    <div x-show="activeTab === 'details'">
+                        <h3 class="text-xl font-bold mb-4">Product Specifications</h3>
+
+                        <!-- Technical Specifications -->
+                        <table class="w-full mb-6">
+                            <tbody>
+                            <tr class="border-b">
+                                <td class="py-2 font-semibold text-gray-600 w-1/3">Brand</td>
+                                <td class="py-2" x-text="product.brand || 'N/A'"></td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="py-2 font-semibold text-gray-600">SKU</td>
+                                <td class="py-2" x-text="product.sku || 'N/A'"></td>
+                            </tr>
+                            <template x-if="product.weight && product.weight.value">
+                                <tr class="border-b">
+                                    <td class="py-2 font-semibold text-gray-600">Weight</td>
+                                    <td class="py-2" x-text="`${getProductWeight().value} ${getProductWeight().unit}`"></td>
+                                </tr>
+                            </template>
+                            <template x-if="product.dimensions && product.dimensions.length">
+                                <tr class="border-b">
+                                    <td class="py-2 font-semibold text-gray-600">Dimensions</td>
+                                    <td class="py-2" x-text="`${getProductDimensions().length} × ${getProductDimensions().width} × ${getProductDimensions().height} ${getProductDimensions().unit}`"></td>
+                                </tr>
+                            </template>
+                            </tbody>
+                        </table>
+
+                        <h3 class="text-xl font-bold mb-4">Product Description</h3>
+                        <p class="text-gray-700 mb-4" x-text="product.description"></p>
+
+                        <template x-if="product.options">
+                            <div>
+                                <h3 class="text-xl font-bold mb-4">Available Options</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <template x-for="(values, option) in product.options" :key="option">
+                                        <div class="mb-4">
+                                            <h4 class="font-bold mb-2" x-text="formatOptionName(option)"></h4>
+                                            <ul class="list-disc list-inside">
+                                                <template x-for="value in values" :key="value">
+                                                    <li class="text-gray-700" x-text="value.charAt(0).toUpperCase() + value.slice(1)"></li>
+                                                </template>
+                                            </ul>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+
+                    <!-- Features Tab -->
+                    <div x-show="activeTab === 'features'" x-cloak>
+                        <h3 class="text-xl font-bold mb-4">Product Features</h3>
+
+                        <template x-if="product.features && Object.keys(product.features).length > 0">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <template x-for="(value, key) in product.features" :key="key">
+                                    <div class="flex">
+                                        <div class="flex-shrink-0 bg-red-100 rounded-full h-12 w-12 flex items-center justify-center text-red-600 mr-4">
+                                            <i class="fas fa-check"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold text-lg" x-text="formatFeatureKey(key)"></h4>
+                                            <p class="text-gray-600" x-text="value"></p>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                        </template>
+
+                        <template x-if="!product.features || Object.keys(product.features).length === 0">
+                            <p class="text-gray-600">No specific features listed for this product.</p>
+                        </template>
+                    </div>
+
+                    <!-- Reviews Tab -->
+                    <div x-show="activeTab === 'reviews'" x-cloak>
+                        <div class="flex flex-col md:flex-row gap-8">
+                            <div class="md:w-1/3">
+                                <div class="bg-gray-50 p-6 rounded-lg">
+                                    <div class="text-center mb-4">
+                                        <div class="text-5xl font-bold text-red-600" x-text="product.rating || '0.0'"></div>
+                                        <div class="flex justify-center my-2">
+                                            <div class="flex text-amber-400">
+                                                <template x-for="i in Math.floor(product.rating || 0)">
+                                                    <i class="fas fa-star"></i>
+                                                </template>
+                                                <template x-if="product.rating % 1 > 0">
+                                                    <i class="fas fa-star-half-alt"></i>
+                                                </template>
+                                                <template x-for="i in (5 - Math.ceil(product.rating || 0))">
+                                                    <i class="far fa-star"></i>
+                                                </template>
+                                            </div>
+                                        </div>
+                                        <div class="text-gray-600" x-text="`Based on ${product.reviews_count || 0} reviews`"></div>
+                                    </div>
+
+                                    <!-- Rating Breakdown -->
+                                    <div class="space-y-2">
+                                        <div class="flex items-center">
+                                            <span class="text-xs font-medium w-12">5 stars</span>
+                                            <div class="flex-1 h-3 mx-2 bg-gray-200 rounded-full overflow-hidden">
+                                                <div class="bg-amber-400 h-full rounded-full" style="width: 65%"></div>
+                                            </div>
+                                            <span class="text-xs font-medium w-8">65%</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <span class="text-xs font-medium w-12">4 stars</span>
+                                            <div class="flex-1 h-3 mx-2 bg-gray-200 rounded-full overflow-hidden">
+                                                <div class="bg-amber-400 h-full rounded-full" style="width: 20%"></div>
+                                            </div>
+                                            <span class="text-xs font-medium w-8">20%</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <span class="text-xs font-medium w-12">3 stars</span>
+                                            <div class="flex-1 h-3 mx-2 bg-gray-200 rounded-full overflow-hidden">
+                                                <div class="bg-amber-400 h-full rounded-full" style="width: 10%"></div>
+                                            </div>
+                                            <span class="text-xs font-medium w-8">10%</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <span class="text-xs font-medium w-12">2 stars</span>
+                                            <div class="flex-1 h-3 mx-2 bg-gray-200 rounded-full overflow-hidden">
+                                                <div class="bg-amber-400 h-full rounded-full" style="width: 3%"></div>
+                                            </div>
+                                            <span class="text-xs font-medium w-8">3%</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <span class="text-xs font-medium w-12">1 star</span>
+                                            <div class="flex-1 h-3 mx-2 bg-gray-200 rounded-full overflow-hidden">
+                                                <div class="bg-amber-400 h-full rounded-full" style="width: 2%"></div>
+                                            </div>
+                                            <span class="text-xs font-medium w-8">2%</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Write Review Button -->
+                                    <div class="mt-6">
+                                        <button class="w-full bg-red-600 text-white py-2 px-4 rounded-full font-medium hover:bg-red-700 transition">
+                                            Write a Review
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="md:w-2/3">
+                                <h3 class="text-xl font-bold mb-4">Customer Reviews</h3>
+
+                                <!-- Sample Reviews -->
+                                <div class="space-y-6">
+                                    <div class="border-b pb-6">
+                                        <div class="flex justify-between mb-2">
+                                            <div>
+                                                <span class="font-bold">Ahmad R.</span>
+                                                <span class="text-gray-600 text-sm ml-2">Verified Buyer</span>
+                                            </div>
+                                            <span class="text-gray-600 text-sm">April 20, 2025</span>
+                                        </div>
+                                        <div class="flex text-amber-400 mb-2">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <h4 class="font-bold">Excellent quality and service</h4>
+                                        <p class="text-gray-700">These tires have transformed my driving experience. The grip is excellent, even in wet conditions, and they're much quieter than my previous set. The Nebhan team was professional during installation too.</p>
+                                    </div>
+
+                                    <div class="border-b pb-6">
+                                        <div class="flex justify-between mb-2">
+                                            <div>
+                                                <span class="font-bold">Layla M.</span>
+                                                <span class="text-gray-600 text-sm ml-2">Verified Buyer</span>
+                                            </div>
+                                            <span class="text-gray-600 text-sm">April 15, 2025</span>
+                                        </div>
+                                        <div class="flex text-amber-400 mb-2">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <h4 class="font-bold">Great value for money</h4>
+                                        <p class="text-gray-700">I was hesitant about ordering tires online, but the process was seamless. The tires arrived quickly and the quality is excellent for the price. Would recommend.</p>
+                                    </div>
+
+                                    <div>
+                                        <div class="flex justify-between mb-2">
+                                            <div>
+                                                <span class="font-bold">Omar K.</span>
+                                                <span class="text-gray-600 text-sm ml-2">Verified Buyer</span>
+                                            </div>
+                                            <span class="text-gray-600 text-sm">April 8, 2025</span>
+                                        </div>
+                                        <div class="flex text-amber-400 mb-2">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                        </div>
+                                        <h4 class="font-bold">Performs exactly as described</h4>
+                                        <p class="text-gray-700">The tread pattern provides excellent grip on mountain roads. I've noticed better fuel efficiency too. Installation was quick and the staff was very knowledgeable about the product.</p>
+                                    </div>
+
+                                    <!-- Load More Button -->
+                                    <div class="text-center mt-8">
+                                        <button class="bg-gray-200 text-gray-800 px-6 py-2 rounded-full font-medium hover:bg-gray-300 transition">
+                                            Load More Reviews
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shipping Tab -->
+                    <div x-show="activeTab === 'shipping'" x-cloak>
+                        <h3 class="text-xl font-bold mb-4">Shipping Information</h3>
+
+                        <div class="mb-6">
+                            <h4 class="font-bold text-lg mb-2">Delivery Options</h4>
+                            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                <li><span class="font-semibold">Standard Delivery:</span> 2-5 business days across Lebanon</li>
+                                <li><span class="font-semibold">Express Delivery:</span> 1-2 business days (available in select areas)</li>
+                                <li><span class="font-semibold">Store Pickup:</span> Available at our Nabatieh-kfrarruman location</li>
+                            </ul>
+                        </div>
+
+                        <div class="mb-6">
+                            <h4 class="font-bold text-lg mb-2">Free Shipping</h4>
+                            <p class="text-gray-700">Free standard shipping is available on qualifying orders over $200 within Lebanon. Some oversized or heavy items may incur additional shipping charges.</p>
+                        </div>
+
+                        <div class="mb-6">
+                            <h4 class="font-bold text-lg mb-2">Installation Services</h4>
+                            <p class="text-gray-700">We offer professional installation services at our location in Nabatieh-kfrarruman. Installation fees may apply based on the product and your vehicle's requirements.</p>
+                        </div>
+
+                        <div>
+                            <h4 class="font-bold text-lg mb-2">Returns & Warranty</h4>
+                            <p class="text-gray-700 mb-2">All products come with a manufacturer's warranty against defects. Tires are covered by a 12-month warranty against manufacturing defects under normal use conditions.</p>
+                            <p class="text-gray-700">Returns are accepted within 30 days of purchase for unused products in original packaging. Please contact us for return authorization before sending any products back.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Products -->
+            <div class="mt-12">
+                <h2 class="text-2xl font-bold mb-6">You May Also Like</h2>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Product 1 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col h-full group">
+                        <div class="relative">
+                            <span class="absolute top-3 left-3 bg-red-500 text-white text-sm px-2 py-1 rounded-full">-15%</span>
+                            <div class="absolute top-3 right-3 flex space-x-2">
+                                <button class="bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:text-red-500 transition">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button class="bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:text-red-500 transition">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1555502287-a0748352c471?auto=format&q=80" alt="Premium All-Season Tires" class="w-full h-48 object-cover group-hover:scale-105 transition duration-300">
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <div class="flex items-center mb-2">
+                                <div class="flex text-amber-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="text-gray-600 text-sm ml-2">4.5 (86)</span>
+                            </div>
+                            <h3 class="font-bold text-lg">Michelin Premier A/S</h3>
+                            <p class="text-gray-600 text-sm mb-4">Premium all-season tires with exceptional wet braking and comfort.</p>
+                            <div class="mt-auto">
+                                <div class="flex justify-between items-center mb-3">
+                                    <div>
+                                        <span class="line-through text-gray-400 text-sm">$189.99</span>
+                                        <span class="font-bold text-lg text-red-600">$159.99</span>
+                                    </div>
+                                    <span class="text-green-500 text-sm">In Stock</span>
+                                </div>
+                                <button class="w-full bg-red-600 text-white px-4 py-2 rounded-full hover:bg-red-700 transition flex items-center justify-center">
+                                    <i class="fas fa-cart-plus mr-2"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col h-full group">
+                        <div class="relative">
+                            <div class="absolute top-3 right-3 flex space-x-2">
+                                <button class="bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:text-red-500 transition">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button class="bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:text-red-500 transition">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1605695612794-ea09c68b6113?auto=format&q=80" alt="All-Terrain Tires" class="w-full h-48 object-cover group-hover:scale-105 transition duration-300">
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <div class="flex items-center mb-2">
+                                <div class="flex text-amber-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="text-gray-600 text-sm ml-2">4.0 (54)</span>
+                            </div>
+                            <h3 class="font-bold text-lg">Continental TerrainContact A/T</h3>
+                            <p class="text-gray-600 text-sm mb-4">All-terrain tire with excellent traction on and off-road.</p>
+                            <div class="mt-auto">
+                                <div class="flex justify-between items-center mb-3">
+                                    <div>
+                                        <span class="font-bold text-lg text-red-600">$179.99</span>
+                                    </div>
+                                    <span class="text-green-500 text-sm">In Stock</span>
+                                </div>
+                                <button class="w-full bg-red-600 text-white px-4 py-2 rounded-full hover:bg-red-700 transition flex items-center justify-center">
+                                    <i class="fas fa-cart-plus mr-2"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 3 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col h-full group">
+                        <div class="relative">
+                            <span class="absolute top-3 left-3 bg-gray-800 text-white text-sm px-2 py-1 rounded-full">New</span>
+                            <div class="absolute top-3 right-3 flex space-x-2">
+                                <button class="bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:text-red-500 transition">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button class="bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:text-red-500 transition">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1611921561618-13debee11692?auto=format&q=80" alt="Luxury Alloy Wheels" class="w-full h-48 object-cover group-hover:scale-105 transition duration-300">
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <div class="flex items-center mb-2">
+                                <div class="flex text-amber-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="text-gray-600 text-sm ml-2">4.5 (32)</span>
+                            </div>
+                            <h3 class="font-bold text-lg">Enkei RPF1 Alloy Wheels</h3>
+                            <p class="text-gray-600 text-sm mb-4">Lightweight performance alloy wheels for enhanced handling and style.</p>
+                            <div class="mt-auto">
+                                <div class="flex justify-between items-center mb-3">
+                                    <div>
+                                        <span class="font-bold text-lg text-red-600">$279.99</span>
+                                    </div>
+                                    <span class="text-amber-500 text-sm">Low Stock</span>
+                                </div>
+                                <button class="w-full bg-red-600 text-white px-4 py-2 rounded-full hover:bg-red-700 transition flex items-center justify-center">
+                                    <i class="fas fa-cart-plus mr-2"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 4 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col h-full group">
+                        <div class="relative">
+                            <div class="absolute top-3 right-3 flex space-x-2">
+                                <button class="bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:text-red-500 transition">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button class="bg-white rounded-full w-8 h-8 flex items-center justify-center shadow hover:text-red-500 transition">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1529776164-ae7a0c477f5d?auto=format&q=80" alt="All-Terrain Tires" class="w-full h-48 object-cover group-hover:scale-105 transition duration-300">
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <div class="flex items-center mb-2">
+                                <div class="flex text-amber-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="text-gray-600 text-sm ml-2">4.0 (54)</span>
+                            </div>
+                            <h3 class="font-bold text-lg">BF Goodrich All-Terrain T/A KO2</h3>
+                            <p class="text-gray-600 text-sm mb-4">Durable all-terrain tires for trucks and SUVs with enhanced traction.</p>
+                            <div class="mt-auto">
+                                <div class="flex justify-between items-center mb-3">
+                                    <div>
+                                        <span class="font-bold text-lg text-red-600">$199.99</span>
+                                    </div>
+                                    <span class="text-green-500 text-sm">In Stock</span>
+                                </div>
+                                <button class="w-full bg-red-600 text-white px-4 py-2 rounded-full hover:bg-red-700 transition flex items-center justify-center">
+                                    <i class="fas fa-cart-plus mr-2"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recently Viewed -->
+            <div class="mt-12">
+                <h2 class="text-2xl font-bold mb-6">Recently Viewed</h2>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <!-- Product 1 -->
+                    <div class="bg-white rounded-lg shadow p-4 flex items-center gap-3">
+                        <div class="w-16 h-16 flex-shrink-0">
+                            <img src="https://images.unsplash.com/photo-1580274455191-1c62238fa333?auto=format&q=80" alt="Continental Tire" class="w-full h-full object-cover rounded">
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-sm">Continental ExtremeContact DWS06</h3>
+                            <span class="text-red-600 font-bold">$169.99</span>
+                        </div>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="bg-white rounded-lg shadow p-4 flex items-center gap-3">
+                        <div class="w-16 h-16 flex-shrink-0">
+                            <img src="https://images.unsplash.com/photo-1611921561618-13debee11692?auto=format&q=80" alt="Alloy Wheel" class="w-full h-full object-cover rounded">
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-sm">Konig Hypergram Wheels</h3>
+                            <span class="text-red-600 font-bold">$240.00</span>
+                        </div>
+                    </div>
+
+                    <!-- Product 3 -->
+                    <div class="bg-white rounded-lg shadow p-4 flex items-center gap-3">
+                        <div class="w-16 h-16 flex-shrink-0">
+                            <img src="https://images.unsplash.com/photo-1600660432518-e24a4802c1c9?auto=format&q=80" alt="Car Wash" class="w-full h-full object-cover rounded">
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-sm">Premium Car Wash</h3>
+                            <span class="text-red-600 font-bold">$35.00</span>
+                        </div>
+                    </div>
+
+                    <!-- Product 4 -->
+                    <div class="bg-white rounded-lg shadow p-4 flex items-center gap-3">
+                        <div class="w-16 h-16 flex-shrink-0">
+                            <img src="https://images.unsplash.com/photo-1527247043589-98e6ac08f56c?auto=format&q=80" alt="Pirelli Tire" class="w-full h-full object-cover rounded">
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-sm">Pirelli P Zero</h3>
+                            <span class="text-red-600 font-bold">$225.99</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-gray-400 pt-12 pb-6 mt-12">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-12 mb-12">
+            <div class="md:col-span-2">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="h-12 w-12 bg-red-600 rounded-full flex items-center justify-center text-white text-xl font-bold">N</div>
+                    <span class="font-extrabold text-2xl text-white tracking-wide">NEBHAN TIRES</span>
+                </div>
+                <p class="mb-6">
+                    Your trusted source for high-quality tires, wheels, and automotive services in Lebanon. With a commitment to customer satisfaction and passion for cars.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#" class="bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-red-600 transition">
+                        <i class="fab fa-facebook-f text-white"></i>
+                    </a>
+                    <a href="#" class="bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-red-600 transition">
+                        <i class="fab fa-twitter text-white"></i>
+                    </a>
+                    <a href="#" class="bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-red-600 transition">
+                        <i class="fab fa-instagram text-white"></i>
+                    </a>
+                    <a href="#" class="bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-red-600 transition">
+                        <i class="fab fa-whatsapp text-white"></i>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-white font-bold text-lg mb-6">Shop</h3>
+                <ul class="space-y-3">
+                    <li><a href="products.html?category=passenger-tires" class="hover:text-white transition">Passenger Tires</a></li>
+                    <li><a href="products.html?category=truck-tires" class="hover:text-white transition">Truck Tires</a></li>
+                    <li><a href="products.html?category=suv-tires" class="hover:text-white transition">SUV Tires</a></li>
+                    <li><a href="products.html?category=performance-tires" class="hover:text-white transition">Performance Tires</a></li>
+                    <li><a href="products.html?category=alloy-wheels" class="hover:text-white transition">Alloy Wheels</a></li>
+                    <li><a href="products.html?filter=sale" class="hover:text-white transition">Special Offers</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-white font-bold text-lg mb-6">Services</h3>
+                <ul class="space-y-3">
+                    <li><a href="services.html?service=tire-change" class="hover:text-white transition">Tire Change</a></li>
+                    <li><a href="services.html?service=wheel-alignment" class="hover:text-white transition">Wheel Alignment</a></li>
+                    <li><a href="services.html?service=balancing" class="hover:text-white transition">Wheel Balancing</a></li>
+                    <li><a href="services.html?service=car-wash" class="hover:text-white transition">Car Washing</a></li>
+                    <li><a href="services.html?service=repair" class="hover:text-white transition">Tire Repair</a></li>
+                    <li><a href="services.html" class="hover:text-white transition">All Services</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-white font-bold text-lg mb-6">Contact</h3>
+                <ul class="space-y-3">
+                    <li class="flex items-start">
+                        <i class="fas fa-map-marker-alt mt-1 mr-3 text-red-600"></i>
+                        <span>Nebhan Tires, Main Street, Nabatieh-kfrarruman, Lebanon</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-phone-alt mr-3 text-red-600"></i>
+                        <span>+961 70 608 543</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-envelope mr-3 text-red-600"></i>
+                        <span>info@nebhantires.com</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-clock mr-3 text-red-600"></i>
+                        <span>Mon-Sat: 8AM-6PM, Sun: 9AM-2PM</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 pt-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p>© 2025 Nebhan Tires. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition">Terms of Service</a>
+                    <a href="#" class="hover:text-white transition">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- WhatsApp Chat Button -->
+<div class="fixed bottom-6 right-6 z-50">
+    <button
+            @click="$store.ui.openWhatsApp('Hello, I would like to inquire about your products.')"
+            class="bg-green-500 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg hover:bg-green-600 transition-colors duration-300">
+        <i class="fab fa-whatsapp text-2xl"></i>
+    </button>
+</div>
+
+<!-- Scroll to Top Button -->
+<div class="fixed bottom-6 left-6 z-50">
+    <button
+            @click="$store.ui.scrollToTop()"
+            class="bg-gray-700 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg hover:bg-gray-800 transition-colors duration-300">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+</div>
+
+
+<!-- Cart Notification -->
+<div class="fixed top-20 right-6 z-50">
+    <div x-show="$store.ui.cartNotificationVisible"
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 transform translate-x-8"
+         x-transition:enter-end="opacity-100 transform translate-x-0"
+         x-transition:leave="transition ease-in duration-300"
+         x-transition:leave-start="opacity-100 transform translate-x-0"
+         x-transition:leave-end="opacity-0 transform translate-x-8"
+         class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded shadow-md flex items-center"
+         x-cloak>
+        <i class="fas fa-check-circle text-green-500 mr-3 text-xl"></i>
+        <div>
+            <div class="font-bold">Item added to cart!</div>
+            <a href="cart.html" class="text-sm underline">View your cart</a>
+        </div>
+    </div>
+</div>
+
+
+<script src="js/products.js"></script>
+<script src="js/app.js"></script>
+<script src="js/product-page.js"></script>
+</body>
+</html>
