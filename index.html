@@ -368,7 +368,7 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <!-- Tire Replacement -->
         <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80" alt="Tire Replacement" class="w-full h-52 object-cover">
+            <img src="images/2.jpeg" alt="Tire Replacement" class="w-full h-52 object-cover">
             <div class="p-6">
                 <h3 class="font-bold text-xl mb-2">Professional Tire Replacement</h3>
                 <p class="text-gray-600 mb-4">Our experts will help you select the right tires and provide professional installation with proper balancing.</p>
@@ -659,33 +659,21 @@
 
 <!-- WhatsApp Chat Button -->
 <div class="fixed bottom-6 right-6 z-50" x-data>
-    <button
-            @click="$store.ui.openWhatsApp('Hello, I would like to inquire about your products and services.')"
-            class="bg-green-500 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg hover:bg-green-600 transition-colors duration-300">
+    <button @click="$store.ui.openWhatsApp('Hello, I would like to inquire about your products and services.')" class="bg-green-500 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg hover:bg-green-600 transition-colors duration-300">
         <i class="fab fa-whatsapp text-2xl"></i>
     </button>
 </div>
 
 <!-- Scroll to Top Button -->
 <div class="fixed bottom-6 left-6 z-50" x-data>
-    <button
-            @click="$store.ui.scrollToTop()"
-            class="bg-gray-700 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg hover:bg-gray-800 transition-colors duration-300">
+    <button @click="$store.ui.scrollToTop()" class="bg-gray-700 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg hover:bg-gray-800 transition-colors duration-300">
         <i class="fas fa-arrow-up"></i>
     </button>
 </div>
 
 <!-- Cart Notification -->
 <div class="fixed top-20 right-6 z-50" x-data>
-    <div x-show="$store.ui.cartNotificationVisible"
-         x-transition:enter="transition ease-out duration-300"
-         x-transition:enter-start="opacity-0 transform translate-x-8"
-         x-transition:enter-end="opacity-100 transform translate-x-0"
-         x-transition:leave="transition ease-in duration-300"
-         x-transition:leave-start="opacity-100 transform translate-x-0"
-         x-transition:leave-end="opacity-0 transform translate-x-8"
-         class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded shadow-md flex items-center"
-         x-cloak>
+    <div x-show="$store.ui.cartNotificationVisible" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform translate-x-8" x-transition:enter-end="opacity-100 transform translate-x-0" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 transform translate-x-0" x-transition:leave-end="opacity-0 transform translate-x-8" class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded shadow-md flex items-center" x-cloak>
         <i class="fas fa-check-circle text-green-500 mr-3 text-xl"></i>
         <div>
             <div class="font-bold">Item added to cart!</div>
@@ -694,6 +682,7 @@
     </div>
 </div>
 </body>
-</html>
+
 
 <!--empty comment-->
+</html>
